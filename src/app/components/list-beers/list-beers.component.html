@@ -1,0 +1,32 @@
+<div>
+  <mat-form-field>
+    <mat-label>Berwer</mat-label>
+    <mat-select [(ngModel)]="selectedberwer" (ngModelChange)="onChangeBerwer($event, 1)">
+      <mat-option *ngFor="let brewer of brewers" [value]="brewer">
+        {{brewer}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="beer" *ngFor="let beer of beers?.beers">
+    <div class="beer__img">
+      <img *ngIf="beer.image_url" [src]="beer.image_url">
+    </div>
+
+    <div class="beer__details">
+      <p class="beer__name">{{beer.name}}</p>
+      <p>{{beer.type}}</p>
+      <span class="beer__price">
+        ${{beer.price}}
+      </span>
+    </div>
+  </div>
+
+  <button 
+    *ngIf="beers && (beers?.total_count > beers?.count)"
+    (click)="onChangeBerwer(selectedberwer, beers.page + 1)"
+    mat-raised-button 
+    color="primary">
+    Load more
+  </button>
+</div>

@@ -1,0 +1,37 @@
+.beer {
+    display: flex;
+    background-color: #373636;
+    color: #e2e0e0;
+    padding: 7px;
+    margin: 10px;
+    border-radius: 7px;
+
+    &__img {
+        width: 20%;
+        text-align: center;
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-top: 7px;
+
+        }
+    }
+
+    &__details {
+        width: 80%;
+        padding: 3px;
+        position: relative;
+    }
+
+    &__name {
+        color: #a17cc3;
+        margin: 0;
+    }
+
+    &__price {
+        position: absolute;
+        right: 4px;
+        bottom: 18px;
+    }
+}

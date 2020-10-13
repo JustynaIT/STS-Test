@@ -1,16 +1,41 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { BeerService } from './services/beer.service';
+import { MainService } from './services/main.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MainComponent } from './components/main/main.component';
+
+import {MatSelectModule} from '@angular/material/select';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatButtonModule} from '@angular/material/button';
+
+
+import { AppRoutingModule } from './app-routing.module';
+import { ListBeersComponent } from './components/list-beers/list-beers.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainComponent,
+    ListBeersComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+
+    MatSelectModule,
+    MatGridListModule,
+    MatButtonModule
   ],
-  providers: [],
+  providers: [BeerService, MainService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
