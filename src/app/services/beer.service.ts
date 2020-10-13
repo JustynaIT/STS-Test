@@ -33,20 +33,23 @@ import { Beer } from '../interfaces/beer';
 
     public getBeersBrewers$(): Observable<any[]> {
       return this.beersBrewersSubject.asObservable();
-
     }
 
     public async setBeersBrewers(brewer, page): Promise<void> {
+      const options = JSON.parse(localStorage.getItem('options')) || {};
+      const perPage = options.numberLoaded || 15;
+      const sortBy = options.sortByField || 'name';
+
       await this.getAllBeers$().subscribe({
         next: (beers: any) => {
           let beersBrewers = beers.filter(beer => beer.brewer === brewer);
-          beersBrewers = this.sort(beersBrewers, 'price');
+          beersBrewers = this.sort(beersBrewers, sortBy);
 
           const totalCount = beersBrewers.length;
           const data: any = {
-            beers: beersBrewers.splice(0, 15 * page),
+            beers: beersBrewers.splice(0, perPage * page),
             page,
-            per_page: 15,
+            per_page: perPage,
             count: null,
             total_count: totalCount,
           };

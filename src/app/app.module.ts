@@ -12,16 +12,21 @@ import { MainComponent } from './components/main/main.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 import { AppRoutingModule } from './app-routing.module';
 import { ListBeersComponent } from './components/list-beers/list-beers.component';
+import { ButtonOptionsComponent } from './components/button-options/button-options.component';
+import { OptionsDialogComponent } from './dialogs/options-dialog/options-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    ListBeersComponent
+    ListBeersComponent,
+    ButtonOptionsComponent,
+    OptionsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,8 @@ import { ListBeersComponent } from './components/list-beers/list-beers.component
 
     MatSelectModule,
     MatGridListModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [BeerService, MainService],
   bootstrap: [AppComponent]

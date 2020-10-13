@@ -1,0 +1,26 @@
+<mat-form-field>
+    <mat-label>Theme</mat-label>
+    <mat-select [(ngModel)]="theme" (ngModelChange)="setOptions($event, 'theme')" >
+      <mat-option *ngFor="let theme of themes" [value]="theme">
+        {{theme}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Number of elements loaded</mat-label>
+    <mat-select [(ngModel)]="numberLoaded" (ngModelChange)="setOptions($event, 'numberLoaded')">
+      <mat-option *ngFor="let number of numberLoadeds"  [value]="number">
+        {{number}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Sorting by</mat-label>
+    <mat-select [(ngModel)]="sortByField" (ngModelChange)="setOptions($event, 'sortByField')">
+      <mat-option *ngFor="let field of sortByFields"  [value]="field">
+        {{field}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
