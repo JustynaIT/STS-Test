@@ -1,5 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ImgDialogComponent } from 'src/app/dialogs/img-dialog/img-dialog.component';
+import { BeerData } from 'src/app/interfaces/beer-data';
+import { SavedDataLocal } from 'src/app/interfaces/saved-data-local';
 import { BeerService } from 'src/app/services/beer.service';
+import { MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-list-beers',
@@ -9,12 +14,15 @@ import { BeerService } from 'src/app/services/beer.service';
 export class ListBeersComponent implements OnInit {
 
   @Input() numberCol: string;
-  @Output() setLocal = new EventEmitter<any>();
+  @Output() setLocal = new EventEmitter<SavedDataLocal>();
 
   brewers: string[];
-  beers: any;
+  beers: BeerData;
   selectedberwer: string;
-  constructor(private beerService: BeerService) { }
+  theme: string;
+  constructor(private beerService: BeerService,
+              private mainService: MainService,
+              public dialog: MatDialog) { }
 
 
   async ngOnInit(): Promise<void> {
@@ -40,8 +48,26 @@ export class ListBeersComponent implements OnInit {
         }
       });
     }, 1500);
+
+    this.mainService.getTheme().subscribe({
+      next: (theme) => {
+        this.theme = theme;
+      }
+    });
   }
 
+  public error(e): void {
+    e.target.src = 'https://image.shutterstock.com/image-vector/picture-vector-icon-no-image-600w-1350441335.jpg';
+  }
+
+  public openImgDialog(beer): void {
+    this.dialog.open(ImgDialogComponent, {
+      data: {
+        img: beer.image_url,
+        name: beer.name
+       }
+    });
+  }
 
   public async onChangeBerwer(brewer, page): Promise<void> {
     this.setLocal.emit({numberCol: this.numberCol, brewer, page });
@@ -49,7 +75,7 @@ export class ListBeersComponent implements OnInit {
     await this.beerService.setBeersBrewers(brewer, page);
 
     await this.beerService.getBeersBrewers$().subscribe({
-      next: (beers: any) => {
+      next: (beers: BeerData) => {
         this.beers = beers;
       }
     });

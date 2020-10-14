@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { MainService } from './main.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Beer } from '../interfaces/beer';
+import { BeerData } from '../interfaces/beer-data';
 
 @Injectable({
     providedIn: 'root'
   })
   export class BeerService {
 
-    beersBrewersSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+    beersBrewersSubject: BehaviorSubject<BeerData> = new BehaviorSubject<BeerData>(null);
 
     brewersSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
     allBeersSubject: BehaviorSubject<Beer[]> = new BehaviorSubject<Beer[]>([]);
@@ -31,7 +32,7 @@ import { Beer } from '../interfaces/beer';
         return this.allBeersSubject.asObservable();
     }
 
-    public getBeersBrewers$(): Observable<any[]> {
+    public getBeersBrewers$(): Observable<BeerData> {
       return this.beersBrewersSubject.asObservable();
     }
 
@@ -41,12 +42,12 @@ import { Beer } from '../interfaces/beer';
       const sortBy = options.sortByField || 'name';
 
       await this.getAllBeers$().subscribe({
-        next: (beers: any) => {
+        next: (beers: Beer[]) => {
           let beersBrewers = beers.filter(beer => beer.brewer === brewer);
           beersBrewers = this.sort(beersBrewers, sortBy);
 
           const totalCount = beersBrewers.length;
-          const data: any = {
+          const data: BeerData = {
             beers: beersBrewers.splice(0, perPage * page),
             page,
             per_page: perPage,
@@ -60,7 +61,7 @@ import { Beer } from '../interfaces/beer';
       });
   }
 
-  private sort(array, type: string): any {
+  private sort(array, type: string): Beer[] {
     return type === 'price' ?
       array.sort((a, b) =>  Number(a[type]) - Number(b[type])) :
       array.sort((a, b) => a[type].localeCompare(b[type]));

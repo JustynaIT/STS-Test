@@ -19,6 +19,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ListBeersComponent } from './components/list-beers/list-beers.component';
 import { ButtonOptionsComponent } from './components/button-options/button-options.component';
 import { OptionsDialogComponent } from './dialogs/options-dialog/options-dialog.component';
+import { ImgDialogComponent } from './dialogs/img-dialog/img-dialog.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { OptionsDialogComponent } from './dialogs/options-dialog/options-dialog.
     MainComponent,
     ListBeersComponent,
     ButtonOptionsComponent,
-    OptionsDialogComponent
+    OptionsDialogComponent,
+    ImgDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { OptionsDialogComponent } from './dialogs/options-dialog/options-dialog.
     MatSelectModule,
     MatGridListModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
   providers: [BeerService, MainService],
   bootstrap: [AppComponent]

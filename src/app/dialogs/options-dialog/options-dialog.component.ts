@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-options-dialog',
@@ -17,8 +18,7 @@ export class OptionsDialogComponent implements OnInit {
   sortByField: string;
 
   constructor(
-    public dialogRef: MatDialogRef<OptionsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    private mainService: MainService) {}
 
   ngOnInit(): void {
     const options = JSON.parse(localStorage.getItem('options')) || null;
@@ -40,5 +40,9 @@ export class OptionsDialogComponent implements OnInit {
 
     options[option] = event;
     localStorage.setItem('options', JSON.stringify(options));
+
+    if (option === 'theme') {
+      this.mainService.setTheme(event);
+    }
   }
 }

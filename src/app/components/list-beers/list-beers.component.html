@@ -8,9 +8,14 @@
     </mat-select>
   </mat-form-field>
 
-  <div class="beer" *ngFor="let beer of beers?.beers">
+  <div class="beer"  [ngClass]="{'beer-light': theme !== 'dark'}" *ngFor="let beer of beers?.beers">
     <div class="beer__img">
-      <img *ngIf="beer.image_url" [src]="beer.image_url">
+      <img 
+        *ngIf="beer.image_url" 
+        [src]="beer.image_url"
+        (error)="error($event)"
+        (click)="openImgDialog(beer)"
+        >
     </div>
 
     <div class="beer__details">
@@ -26,7 +31,7 @@
     *ngIf="beers && (beers?.total_count > beers?.count)"
     (click)="onChangeBerwer(selectedberwer, beers.page + 1)"
     mat-raised-button 
-    color="primary">
+    color="accent">
     Load more
   </button>
 </div>

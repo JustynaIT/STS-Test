@@ -4,18 +4,26 @@ import { MainService } from './services/main.service';
 
 @Component({
   selector: 'app-root',
-  template: `<router-outlet></router-outlet>`,
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   title = 'STS-test';
+  theme = '';
 
   constructor(private mainService: MainService, private beerService: BeerService) {}
 
-  public ngOnInit() {    
+  public ngOnInit(): void {
       this.beerService.setData();
       this.beerService.getBrewers$().subscribe({
         next: (brewers) => {
          // console.log(brewers);
+        }
+      });
+
+      this.mainService.getTheme().subscribe({
+        next: (theme) => {
+          this.theme = theme;
         }
       });
   }

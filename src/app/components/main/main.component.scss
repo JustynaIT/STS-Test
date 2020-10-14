@@ -1,6 +1,8 @@
 .container {
     display: flex;
-    margin: 30px 40px;
+    margin: 0 40px;
+    padding: 2vh 0;
+    min-height: 96vh;    
 
     &__list {
         width: 100%;

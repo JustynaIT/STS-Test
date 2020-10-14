@@ -7,11 +7,22 @@ import { Beer } from '../interfaces/beer';
     providedIn: 'root'
   })
   export class MainService {
+    themeSubject: BehaviorSubject<string> = new BehaviorSubject<string>('dark');
 
-    constructor(private http: HttpClient) { }
-
-    public getAll(): Observable<any> {
-      return this.http.get(`api/beers/`);
+    constructor(private http: HttpClient) {
+      const options = JSON.parse(localStorage.getItem('options')) || {};
+      this.themeSubject.next(options.theme);
     }
 
+    public getAll(): Observable<Beer[]> {
+      return this.http.get<Beer[]>(`api/beers/`);
+    }
+
+    public getTheme(): Observable<string> {
+      return this.themeSubject.asObservable();
+    }
+
+    public setTheme(theme): void {
+      this.themeSubject.next(theme);
+    }
 }
