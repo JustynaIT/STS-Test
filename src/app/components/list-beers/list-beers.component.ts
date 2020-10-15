@@ -16,10 +16,10 @@ export class ListBeersComponent implements OnInit {
   @Input() numberCol: string;
   @Output() setLocal = new EventEmitter<SavedDataLocal>();
 
-  brewers: string[];
-  beers: BeerData;
-  selectedberwer: string;
-  theme: string;
+  public brewers: string[];
+  public beers: BeerData;
+  public selectedberwer: string;
+  public theme: string;
   constructor(private beerService: BeerService,
               private mainService: MainService,
               public dialog: MatDialog) { }
@@ -36,7 +36,7 @@ export class ListBeersComponent implements OnInit {
           this.brewers = berwers;
           const savedData = JSON.parse(localStorage.getItem('savedData'));
 
-          if (savedData[this.numberCol]) {
+          if (savedData && savedData[this.numberCol]) {
             const brewer = savedData[this.numberCol].brewer;
             const page = savedData[this.numberCol]?.page;
 
@@ -47,7 +47,7 @@ export class ListBeersComponent implements OnInit {
           }
         }
       });
-    }, 1500);
+    }, 1700);
 
     this.mainService.getTheme().subscribe({
       next: (theme) => {

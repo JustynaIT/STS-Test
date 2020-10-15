@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SavedDataLocal } from 'src/app/interfaces/saved-data-local';
 
 @Component({
@@ -6,16 +6,11 @@ import { SavedDataLocal } from 'src/app/interfaces/saved-data-local';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
 
   constructor() { }
 
-
-  ngOnInit(): void {
-
-  }
-
-  public setLocalStorage(savedData: SavedDataLocal): void{
+  public setLocalStorage(savedData: SavedDataLocal): void {
     const dataL = JSON.parse(localStorage.getItem('savedData')) || [];
 
     dataL[savedData.numberCol] = { page: savedData.page, brewer: savedData.brewer };

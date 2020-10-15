@@ -8,7 +8,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 })
 export class ImgDialogComponent implements OnInit {
 
-  beer: any;
+  public beer: any;
 
   constructor(
     public dialogRef: MatDialogRef<ImgDialogComponent>,

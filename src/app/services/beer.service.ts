@@ -36,7 +36,7 @@ import { BeerData } from '../interfaces/beer-data';
       return this.beersBrewersSubject.asObservable();
     }
 
-    public async setBeersBrewers(brewer, page): Promise<void> {
+    public async setBeersBrewers(brewer: string, page: number): Promise<void> {
       const options = JSON.parse(localStorage.getItem('options')) || {};
       const perPage = options.numberLoaded || 15;
       const sortBy = options.sortByField || 'name';
@@ -61,7 +61,7 @@ import { BeerData } from '../interfaces/beer-data';
       });
   }
 
-  private sort(array, type: string): Beer[] {
+  private sort(array: Beer[], type: string): Beer[] {
     return type === 'price' ?
       array.sort((a, b) =>  Number(a[type]) - Number(b[type])) :
       array.sort((a, b) => a[type].localeCompare(b[type]));

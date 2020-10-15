@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { OptionsDialogComponent } from 'src/app/dialogs/options-dialog/options-dialog.component';
 
@@ -7,20 +7,13 @@ import { OptionsDialogComponent } from 'src/app/dialogs/options-dialog/options-d
   templateUrl: './button-options.component.html',
   styleUrls: ['./button-options.component.scss']
 })
-export class ButtonOptionsComponent implements OnInit {
+export class ButtonOptionsComponent {
 
   constructor(public dialog: MatDialog) { }
 
-  ngOnInit(): void {
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(OptionsDialogComponent, {
+  public openDialog(): void {
+    this.dialog.open(OptionsDialogComponent, {
       width: '250px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 
